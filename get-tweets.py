@@ -1,23 +1,31 @@
 import tweepy
+import numpy as np
+from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 
-def stream_saver(search_terms):
-    consumer_key = 'qBaFzrUpKKLfPHIj7E3DYASoZ'
-    consumer_secret = 'mJnvR16V6YlTgXQbRxAK7anxk74jfplTNiHRbkH6R3gI8MIgfu'
-    access_token = '941847418873745408-xK9YYfAWXa2xdXiPBmcuBSskq2DGDIZ'
-    access_token_secret = 'BNt8ss4idIMVwpNJUnpdiYt6xhQaPIaftgjv0VtUP3gnc'
+#Secret Twitter Keys
+consumer_key = 'secret'
+consumer_secret = 'secret'
+access_token = 'secret'
+access_token_secret = 'secret'
 
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    
-    api = tweepy.API(auth)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
 
-    class CustomStreamListener(tweepy.StreamListener):
+api = tweepy.API(auth)
+#sentiment analysis
+sid = SIA()
 
-        def on_status(self, status):
-            print (status.author.screen_name, status.created_at, status.text)
+# override tweepy.StreamListener to add logic to on_status
+class MyStreamListener(tweepy.StreamListener):
 
-    streamingAPI = tweepy.streaming.Stream(auth, CustomStreamListener())
-    streamingAPI.filter(track=[search_terms])
-    
-    
-stream_saver('wow')
+    def on_status(self, status):
+        tweet = status.text
+        author = status.author.screen_name
+        sentiment = sid.polarity_scores(tweet)
+
+        print(author, '\n', tweet, '\n', sentiment, '\n\n')
+
+myStreamListener = MyStreamListener()
+myStream = tweepy.Stream(auth = api.auth, listener=MyStreamListener())
+
+myStream.filter(track=['MSFT'])
