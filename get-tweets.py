@@ -8,6 +8,8 @@ consumer_secret = 'secret'
 access_token = 'secret'
 access_token_secret = 'secret'
 
+
+
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
@@ -28,4 +30,4 @@ class MyStreamListener(tweepy.StreamListener):
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=MyStreamListener())
 
-myStream.filter(track=['MSFT'])
+myStream.filter(track=['microsoft'])
