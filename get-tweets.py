@@ -17,8 +17,8 @@ stream_id = stream_ids[0]
 
 # Make instance of stream id object 
 stream = Stream(
-    token=stream_id,  # (!) link stream id to 'token' key
-    maxpoints=100      # (!) keep a max of 80 pts on screen
+    token=stream_id,  # link stream id to 'token' key
+    maxpoints=100      # keep a max of 100 pts on screen
 )
 
 
@@ -28,7 +28,7 @@ trace1 = Scatter(
     y=[],
     mode='markers',
     text=[],
-    stream=stream         # (!) embed stream id, 1 per trace
+    stream=stream      
 )
 
 data = Data([trace1])
@@ -41,7 +41,7 @@ layout = Layout(title='Real Time Sentiment of Tweets About %s' %search_term)
 fig = Figure(data=data, layout=layout)
 
 # (@) Send fig to Plotly, initialize streaming plot, open new tab
-unique_url = py.plot(fig, filename='2838838482839428349234928')
+unique_url = py.plot(fig, filename='livetweetstream')
 
 # (@) Make instance of the Stream link object, 
 #     with same stream id as Stream id object
@@ -53,28 +53,23 @@ s.open()
 # Delay start of stream by 5 sec (time to switch tabs)
 time.sleep(5)
 
-
-#Secret Twitter Keys
-# consumer_key = 'secret'
-# consumer_secret = 'secret'
-# access_token = 'secret'
-# access_token_secret = 'secret'
-
-consumer_key = 'qBaFzrUpKKLfPHIj7E3DYASoZ'
-consumer_secret = 'mJnvR16V6YlTgXQbRxAK7anxk74jfplTNiHRbkH6R3gI8MIgfu'
-access_token = '941847418873745408-xK9YYfAWXa2xdXiPBmcuBSskq2DGDIZ'
-access_token_secret = 'BNt8ss4idIMVwpNJUnpdiYt6xhQaPIaftgjv0VtUP3gnc'
+#Secret Twitter Keys. You have to put in your own!
+consumer_key = 'secret'
+consumer_secret = 'secret'
+access_token = 'secret'
+access_token_secret = 'secret'
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
+#initialize twitter 
 api = tweepy.API(auth)
-#sentiment analysis
+#initialize sentiment analysis
 sid = SIA()
 
 # override tweepy.StreamListener to add logic to on_status
 class MyStreamListener(tweepy.StreamListener):
-
+    #every time a new tweet with the search term is published this will be executed
     def on_status(self, status):
         tweet = status.text
         author = status.author.screen_name
@@ -90,8 +85,7 @@ class MyStreamListener(tweepy.StreamListener):
         except:
             pass
 
+#twitter stream setup
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=MyStreamListener())
-
 myStream.filter(track=[search_term])
-s.close()
