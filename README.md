@@ -20,8 +20,8 @@ pip install:
 ## Built With
 
 * [NLTK SIA Vader](http://www.nltk.org/_modules/nltk/sentiment/vader.html) - Sentiment Analysis
-* [plotly](https://plot.ly/python/getting-started/)
-* [tweepy](https://tweepy.readthedocs.io/en/v3.5.0/)
+* [plotly](https://plot.ly/python/getting-started/) - Live Plotting
+* [tweepy](https://tweepy.readthedocs.io/en/v3.5.0/) - Twitter API
 
 ## Author
 
