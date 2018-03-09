@@ -34,7 +34,7 @@ trace1 = Scatter(
 data = Data([trace1])
 
 #search term
-search_term = raw_input("Please input the term you would like to search for: ")
+search_term = input("Please input the term you would like to search for: ")
 # Add title to layout object
 layout = Layout(title='Real Time Sentiment of Tweets About %s' %search_term)
 
@@ -55,15 +55,10 @@ s.open()
 time.sleep(5)
 
 #Secret Twitter Keys. You have to put in your own!
-#consumer_key = 'secret'
-#consumer_secret = 'secret'
-#access_token = 'secret'
-#access_token_secret = 'secret'
-
-consumer_key = 'qBaFzrUpKKLfPHIj7E3DYASoZ'
-consumer_secret = 'mJnvR16V6YlTgXQbRxAK7anxk74jfplTNiHRbkH6R3gI8MIgfu'
-access_token = '941847418873745408-xK9YYfAWXa2xdXiPBmcuBSskq2DGDIZ'
-access_token_secret = 'BNt8ss4idIMVwpNJUnpdiYt6xhQaPIaftgjv0VtUP3gnc'
+consumer_key = 'secret'
+consumer_secret = 'secret'
+access_token = 'secret'
+access_token_secret = 'secret'
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
