@@ -60,6 +60,11 @@ time.sleep(5)
 #access_token = 'secret'
 #access_token_secret = 'secret'
 
+consumer_key = 'qBaFzrUpKKLfPHIj7E3DYASoZ'
+consumer_secret = 'mJnvR16V6YlTgXQbRxAK7anxk74jfplTNiHRbkH6R3gI8MIgfu'
+access_token = '941847418873745408-xK9YYfAWXa2xdXiPBmcuBSskq2DGDIZ'
+access_token_secret = 'BNt8ss4idIMVwpNJUnpdiYt6xhQaPIaftgjv0VtUP3gnc'
+
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
